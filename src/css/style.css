@@ -1,0 +1,235 @@
+@font-face {
+    font-family: 'Birningham';
+    src: url("../assets/fonts/Birmingham.ttf"); /* Путь к файлу со шрифтом */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-width: 480px;
+    min-height: 100vh;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center center;
+    background-image: url("../assets/home.png");
+    transition: background-image 1s ease-in-out;
+}
+
+.wrapper {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-box, .game-name, .start-button-box, .shuffle-button-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Birningham', sans-serif;
+}
+
+.matte {
+    background: rgb(0,0,0,0.5);
+    border-radius: 10px;
+}
+
+.start-box, .chose-block {
+    min-width: 80vw;
+    min-height: 84vh;
+    position: absolute;
+    top: 7vh;
+    left: 10vw;
+    font-size: 64px;
+}
+
+.game-name {
+    margin-top: 80px;
+}
+
+.helper {
+    margin-top: 20px;
+}
+
+.start-button, .shuffle-button {
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+    background: #2a2929;
+    border-radius: 10px;
+    border: none;
+    padding: 20px;
+    font-size: 36px;
+    box-shadow: 0 10px 3px #424242;
+    transition: all 0.2s;
+    position: relative;
+    top: 0;
+}
+
+.start-button:active, .shuffle-button:active {
+    top: 7px;
+    box-shadow: 0 3px 3px #424242;
+    transition: all .2s;
+}
+
+.start-button-box {
+    margin-top: 30px;
+}
+
+.for-hid {
+    opacity: 1;
+    transition: 1s;
+    z-index: 2;
+}
+
+.hidden {
+    z-index: 1;
+    opacity: 0;
+}
+
+.ancients-block {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.ancient-element {
+    width: 220px;
+    height: 285px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.active-ancient, .active-difficulty {
+    box-shadow: 0 0 20px;
+}
+
+.difficulties-block {
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Birningham', sans-serif;
+    flex-wrap: wrap;
+}
+
+.difficulty-element {
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 28px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(28, 27, 27);
+}
+
+.shuffle-button-block {
+    margin-top: 20px;
+}
+
+.game-block, .info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.info {
+    margin-top: 40px;
+}
+
+.game-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.selected, .level-deck-counter {
+    width: 20vw;
+    min-height: 50vh;
+    background-color: rgb(0,0,0,0.5);
+}
+
+.selected {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 10px 10px 0;
+}
+.level-deck-counter {
+    border-radius: 10px 0  0 10px;
+}
+
+.dec-block {
+    min-width: 50vw;
+    min-height: 50vh;
+    background-color: rgb(0,0,0,0.5);
+    border-radius: 10px;
+}
+
+.selected-ancient {
+    width: 198px;
+    height: 257px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.selected-difficulty, .level-name {
+    font-family: 'Birningham', sans-serif;
+}
+
+.level-name {
+    margin: 20px auto;
+}
+
+.counter {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+}
+.green {
+    background-color: rgb(34, 159, 51, 0.8);
+}
+
+.brown {
+    background-color: brown;
+}
+
+.blue {
+    background-color: dodgerblue;
+}
+
+.dec-block {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.unflipped-deck, .flipped-card {
+    width: 220px;
+    height: 285px;
+    border-radius: 10px;
+}
+
+.unflipped-deck {
+    cursor: pointer;
+}
+
+.level-deck-counter {
+    display: flex;
+    flex-direction: column;
+}
+
+.level-counter {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}

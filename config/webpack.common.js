@@ -6,7 +6,7 @@ const paths = require('./paths')
 
 module.exports = {
   // Where webpack looks to start building the bundle
-  entry: [paths.src + '/index.js'],
+  entry: [paths.src + '/js/index.js'],
 
   // Where webpack outputs the assets and bundles
   output: {
@@ -37,9 +37,8 @@ module.exports = {
     // Generates an HTML file from a template
     // Generates deprecation warning: https://github.com/jantimon/html-webpack-plugin/issues/1501
     new HtmlWebpackPlugin({
-      title: 'webpack Boilerplate',
-      favicon: paths.src + '/images/favicon.png',
-      template: paths.src + '/template.html', // template file
+      title: 'Eldritch horror',
+      template: paths.src + '/index.html', // template file
       filename: 'index.html', // output file
     }),
   ],
@@ -60,7 +59,7 @@ module.exports = {
 
   resolve: {
     modules: [paths.src, 'node_modules'],
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.json'],
     alias: {
       '@': paths.src,
       assets: paths.public,
