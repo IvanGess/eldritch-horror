@@ -1,14 +1,9 @@
-// eslint-disable-next-line import/extensions
 import difficulties from '../data/difficulties.js';
-// eslint-disable-next-line import/extensions
 import ancientsData from '../data/ancients.js';
 import background from '../assets/mythicCardBackground.png';
 import '../css/style.css';
-// eslint-disable-next-line import/extensions
 import greenCardsData from '../assets/MythicCards/greenCards.js';
-// eslint-disable-next-line import/extensions
 import brownCardsData from '../assets/MythicCards/brownCards.js';
-// eslint-disable-next-line import/extensions
 import blueCardsData from '../assets/MythicCards/blueCards.js';
 
 const difficultyConfig = {
@@ -42,7 +37,6 @@ let selectedGameDifficulty = '';
 let selectedAncient = '';
 
 function initPage() {
-  // eslint-disable-next-line no-use-before-define
   loadGame();
 }
 function loadPage(block) {
@@ -55,7 +49,6 @@ function hidePage(block) {
 
 function loadGame() {
   const startBlock = document.querySelector('.start-button');
-  // eslint-disable-next-line no-use-before-define
   startBlock.addEventListener('click', showChoseBlock);
 }
 
@@ -64,15 +57,10 @@ function showChoseBlock() {
   const choseBlock = document.querySelector('.chose-block');
   hidePage(startBlock);
   loadPage(choseBlock);
-  // eslint-disable-next-line no-use-before-define
   showAncients();
-  // eslint-disable-next-line no-use-before-define
   showDifficulties();
-  // eslint-disable-next-line no-use-before-define
   createAncientsClickListener();
-  // eslint-disable-next-line no-use-before-define
   createDifficultyClickListener();
-  // eslint-disable-next-line no-use-before-define
   createShuffleDeckClickListener();
 }
 
@@ -91,7 +79,6 @@ function showAncients() {
 
 function createAncientsClickListener() {
   const ancientElements = document.querySelectorAll('.ancient-element');
-  // eslint-disable-next-line no-use-before-define
   Array.from(ancientElements).map((x) => x.addEventListener('click', getAncient));
 }
 
@@ -103,6 +90,8 @@ function getAncient(e) {
   }
   currentAncient.classList.add('active-ancient');
   selectedAncient = currentAncient.getAttribute('name');
+  const difficulty = document.querySelector('.difficulties-block');
+  loadPage(difficulty);
 }
 
 function showDifficulties() {
@@ -118,7 +107,6 @@ function showDifficulties() {
 
 function createDifficultyClickListener() {
   const difficultyElements = document.querySelectorAll('.difficulty-element');
-  // eslint-disable-next-line no-use-before-define
   Array.from(difficultyElements).map((x) => x.addEventListener('click', getDifficulty));
 }
 
@@ -130,11 +118,12 @@ function getDifficulty(e) {
   }
   currentDifficulty.classList.add('active-difficulty');
   selectedGameDifficulty = currentDifficulty.getAttribute('name');
+  const shuffleButton = document.querySelector('.shuffle-button-block');
+  loadPage(shuffleButton);
 }
 
 function createShuffleDeckClickListener() {
   const shuffleDeckElement = document.querySelector('.shuffle-button');
-  // eslint-disable-next-line no-use-before-define
   shuffleDeckElement.addEventListener('click', startGame);
 }
 
@@ -183,17 +172,13 @@ function startGame() {
   hidePage(choseBlock);
   loadPage(gameBlock);
 
-  // eslint-disable-next-line no-use-before-define
   const config = getConfig(selectedAncient);
   showChosenAncient(config);
   showDifficulty();
 
-  // eslint-disable-next-line no-use-before-define
   const shuffledDeck = shuffleDeck();
   const cardsCounter = getCardsCountByStages(shuffledDeck);
-  // eslint-disable-next-line no-use-before-define
   showUnflippedDeck(shuffledDeck);
-  // eslint-disable-next-line no-use-before-define
   showCardsCountByStages(cardsCounter);
 }
 
@@ -226,13 +211,13 @@ function getConfig(ancient) {
 function showUnflippedDeck(deck) {
   const deckBlock = document.querySelector('.unflipped-deck');
   deckBlock.style.background = `url('${background}')`;
-  // eslint-disable-next-line no-use-before-define
+  deckBlock.style.backgroundSize = 'cover';
+  deckBlock.style.backgroundPosition = 'center center';
   createDeckClickListener(deck);
 }
 
 function createDeckClickListener(deck) {
   const deckBlock = document.querySelector('.unflipped-deck');
-  // eslint-disable-next-line no-use-before-define
   deckBlock.addEventListener('click', (event) => showTopCardFromDeck(deck, event));
 }
 
@@ -254,6 +239,8 @@ function showTopCardFromDeck(deck) {
   const flippedCardBlock = document.querySelector('.flipped-card');
   if (flippedCard.length) {
     flippedCardBlock.style.background = `url('${flippedCard[0].cardFace}')`;
+    flippedCardBlock.style.backgroundSize = 'contain';
+    flippedCardBlock.style.backgroundPosition = 'center center';
   } else {
     flippedCardBlock.style.background = '';
   }
@@ -263,7 +250,6 @@ function showTopCardFromDeck(deck) {
 function shuffleDeck() {
   const config = getConfig(selectedAncient);
   const difficulty = difficultyConfig[selectedGameDifficulty];
-  // eslint-disable-next-line no-use-before-define
   const finalDeck = createFinalDeck(config, difficulty);
   return finalDeck;
 }
@@ -314,10 +300,8 @@ function getCardsByStage(deck, config) {
 }
 
 function createFinalDeck(config, difficulty) {
-  // eslint-disable-next-line max-len
   const [finalGreenDeck, finalBrownDeck, finalBlueDeck] = [greenCardsData, brownCardsData, blueCardsData]
     .map((element) => getSortedFinalDeckOfColor(element.filter((x) => x.type
       !== getRemovedCardDifficulty(difficulty)), difficulty));
-  const finalDeck = getCardsByStage([finalGreenDeck, finalBrownDeck, finalBlueDeck], config[0]);
-  return finalDeck;
+  return getCardsByStage([finalGreenDeck, finalBrownDeck, finalBlueDeck], config[0]);
 }
