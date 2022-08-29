@@ -296,6 +296,7 @@ function shuffle(arr) {
 function getSortedFinalDeckOfColor(deck, difficulty) {
   if (difficulty.order.length) {
     deck.sort((a, b) => a.type.indexOf('normal') - b.type.indexOf('normal'));
+
   } else {
     shuffle(deck);
   }
@@ -310,14 +311,29 @@ function createStage(decs, config) {
   stage = [...greenCards, ...brownCards, ...blueCards];
   return shuffle(shuffle(stage));
 }
+function getCountOfColorCards(deck, config, color) {
+    const count = parseInt(config.firstStage[color], 10)
+        + parseInt(config.secondStage[color], 10)
+        + parseInt(config.thirdStage[color], 10);
+    console.log(count);
+    return count;
+}
 
-function getCardsByStage(deck, config) {
-  const greenCard = deck[0];
-  const brownCard = deck[1];
-  const blueCard = deck[2];
-  const firstStage = createStage([greenCard, brownCard, blueCard], config.firstStage);
-  const secondStage = createStage([greenCard, brownCard, blueCard], config.secondStage);
-  const thirdStage = createStage([greenCard, brownCard, blueCard], config.thirdStage);
+function getCardsByStage(deck, config, difficulty) {
+    console.log(getCountOfColorCards(deck[0], config, 'greenCards'));
+    let greenCard, blueCard, brownCard;
+    if (difficulty.order.length) {
+      greenCard = deck[0].slice(0, getCountOfColorCards(deck[0], config, 'greenCards'));
+      brownCard = deck[1].slice(0, getCountOfColorCards(deck[0], config, 'brownCards'));
+      blueCard = deck[2].slice(0, getCountOfColorCards(deck[0], config, 'blueCards'));
+    } else {
+      greenCard = deck[0];
+      brownCard = deck[1];
+      blueCard = deck[2];
+    }
+  const firstStage = createStage([shuffle(greenCard), shuffle(brownCard), shuffle(blueCard)], config.firstStage);
+  const secondStage = createStage([shuffle(greenCard), shuffle(brownCard), shuffle(blueCard)], config.secondStage);
+  const thirdStage = createStage([shuffle(greenCard), shuffle(brownCard), shuffle(blueCard)], config.thirdStage);
   return { firstStage, secondStage, thirdStage };
 }
 
@@ -325,5 +341,5 @@ function createFinalDeck(config, difficulty) {
   const [finalGreenDeck, finalBrownDeck, finalBlueDeck] = [greenCardsData, brownCardsData, blueCardsData]
     .map((element) => getSortedFinalDeckOfColor(element.filter((x) => x.type
       !== getRemovedCardDifficulty(difficulty)), difficulty));
-  return getCardsByStage([finalGreenDeck, finalBrownDeck, finalBlueDeck], config[0]);
+  return getCardsByStage([finalGreenDeck, finalBrownDeck, finalBlueDeck], config[0], difficulty);
 }
