@@ -170,7 +170,7 @@ body {
 
 .dec-block {
     min-width: 50vw;
-    min-height: 50vh;
+    min-height: 60vh;
     background-color: rgb(0,0,0,0.5);
     border-radius: 10px;
 }
@@ -215,7 +215,7 @@ body {
 
 .unflipped-deck, .flipped-card {
     width: 220px;
-    height: 285px;
+    height: 325px;
     border-radius: 10px;
 }
 

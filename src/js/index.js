@@ -237,10 +237,14 @@ function showTopCardFromDeck(deck) {
   const flippedCard = spliceTopCard(deck);
   const currentCardsCount = getCardsCountByStages(deck);
   const flippedCardBlock = document.querySelector('.flipped-card');
+  const image = new Image();
+  image.src = `${flippedCard[0].cardFace}`;
   if (flippedCard.length) {
-    flippedCardBlock.style.background = `url('${flippedCard[0].cardFace}')`;
-    flippedCardBlock.style.backgroundSize = 'contain';
-    flippedCardBlock.style.backgroundPosition = 'center center';
+    image.onload = () => {
+      flippedCardBlock.style.background = `url('${flippedCard[0].cardFace}')`;
+      flippedCardBlock.style.backgroundSize = 'contain';
+      flippedCardBlock.style.backgroundPosition = 'center center';
+    }
   } else {
     flippedCardBlock.style.background = '';
   }
