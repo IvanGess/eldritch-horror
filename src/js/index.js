@@ -1,6 +1,7 @@
 import difficulties from '../data/difficulties.js';
 import ancientsData from '../data/ancients.js';
 import background from '../assets/mythicCardBackground.jpg';
+import cardBack from '../assets/mythicCardBackground.jpg'
 import '../css/style.css';
 import greenCardsData from '../assets/MythicCards/greenCards.js';
 import brownCardsData from '../assets/MythicCards/brownCards.js';
@@ -237,17 +238,34 @@ function showTopCardFromDeck(deck) {
   const flippedCard = spliceTopCard(deck);
   const currentCardsCount = getCardsCountByStages(deck);
   const flippedCardBlock = document.querySelector('.flipped-card');
+  const frontOfFlippedCade = document.querySelector('.front');
+  const backOfFlippedCard = document.querySelector('.back');
   const image = new Image();
-  image.src = `${flippedCard[0].cardFace}`;
   if (flippedCard.length) {
+    image.src = `${flippedCard[0].cardFace}`;
+    if (flippedCardBlock.classList.contains('flip')) {
+      flippedCardBlock.classList.toggle('flip');
+      setTimeout(() => {
+        flippedCardBlock.classList.toggle('flip');
+      }, 1000);
+    } else if (!flippedCardBlock.classList.contains('flip')){
+      flippedCardBlock.classList.toggle('flip');
+    }
     image.onload = () => {
-      flippedCardBlock.style.background = `url('${flippedCard[0].cardFace}')`;
-      flippedCardBlock.style.backgroundSize = 'contain';
-      flippedCardBlock.style.backgroundPosition = 'center center';
+      setTimeout(() => {
+        frontOfFlippedCade.style.background = `url('${flippedCard[0].cardFace}')`;
+        frontOfFlippedCade.style.backgroundSize = 'contain';
+        frontOfFlippedCade.style.backgroundPosition = 'center center';
+      }, 100);
+
+        backOfFlippedCard.style.background = `url('${cardBack}')`;
+        backOfFlippedCard.style.backgroundSize = 'cover';
+        backOfFlippedCard.style.backgroundPosition = 'center center';
     }
   } else {
-    flippedCardBlock.style.background = '';
+    hidePage(flippedCardBlock);
   }
+  console.log(flippedCard, flippedCardBlock)
   showCardsCountByStages(currentCardsCount);
 }
 
