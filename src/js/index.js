@@ -308,7 +308,7 @@ function createStage(decs, config) {
   const brownCards = decs[1].splice(0, config.brownCards);
   const blueCards = decs[2].splice(0, config.blueCards);
   stage = [...greenCards, ...brownCards, ...blueCards];
-  return shuffle(stage);
+  return shuffle(shuffle(stage));
 }
 
 function getCardsByStage(deck, config) {
