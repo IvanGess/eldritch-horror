@@ -1,6 +1,6 @@
 import difficulties from '../data/difficulties.js';
 import ancientsData from '../data/ancients.js';
-import background from '../assets/mythicCardBackground.png';
+import background from '../assets/mythicCardBackground.jpg';
 import '../css/style.css';
 import greenCardsData from '../assets/MythicCards/greenCards.js';
 import brownCardsData from '../assets/MythicCards/brownCards.js';
